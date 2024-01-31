@@ -6,7 +6,7 @@
 	import Alert from '$lib/components/alert.svelte';
 	import { blur } from 'svelte/transition';
 
-	const routes = ['/user/basic', '/user/details'];
+	const routes = ['/user/basic', '/user/details', '/user/summary'];
 
 	const {
 		elements: {

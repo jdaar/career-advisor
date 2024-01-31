@@ -90,16 +90,16 @@
 		<div class="flex gap-sm">
 			<button
 				class="hidden sm:block text-xs border rounded p-sm {error !== null
-					? 'bg-yellow-200 border-yellow-400'
-					: 'bg-gray-100'}"
+					? 'bg-yellow-200 hover:bg-yellow-300 border-yellow-400'
+					: 'bg-gray-100 hover:bg-gray-200'}"
 				use:melt={$trigger}
 			>
 				Edit
 			</button>
 			<button
 				class="hidden sm:block text-xs border rounded p-sm border-red-300 {error !== null
-					? 'bg-red-200'
-					: 'bg-red-50'}"
+					? 'bg-red-200 hover:bg-red-300'
+					: 'bg-red-50 hover:bg-red-100'}"
 				on:click={deleteItem}
 			>
 				Delete

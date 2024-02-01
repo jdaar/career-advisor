@@ -1,6 +1,7 @@
 <script lang="ts">
 	import { createLabel, melt } from "@melt-ui/svelte";
 	import type { PageData } from "./$types";
+	import { prettyName } from "$lib/utils";
 
     export let data: PageData;
 
@@ -14,7 +15,7 @@
 {#if $error$.length > 0}
   <div class="flex flex-col gap-sm p-sm">
     {#each $error$ as error}
-      <p class="text-xs text-red-500">You must first fix the errors in the {error.field} field</p>
+      <p class="text-xs text-red-500">You must first fix the errors in the {prettyName(error.field)} field</p>
     {/each}
   </div>
 {:else}
@@ -35,6 +36,12 @@
   <fieldset class="w-full">
     <label for="cellphone" class="text-xs font-medium" use:melt={$rootLabel}>Cellphone</label>
     <p id="cellphone" class="font-mono text-sm">{$UserObservable.cellphone}</p>
+  </fieldset>
+  {/if}
+  {#if $UserObservable.yearsOfExperience}
+  <fieldset class="w-full">
+    <label for="years-of-experience" class="text-xs font-medium" use:melt={$rootLabel}>Years of experience</label>
+    <p id="years-of-experience" class="font-mono text-sm">{$UserObservable.yearsOfExperience}</p>
   </fieldset>
   {/if}
   {#if $UserObservable.skills.length > 0}
@@ -59,7 +66,7 @@
   <fieldset class="w-full">
     <label for="experience" class="text-xs font-medium" use:melt={$rootLabel}>Experience</label>
     {#each $UserObservable.experience as experience}
-      <p id="education" class="font-mono text-sm">{experience.title} at {experience.subtitle}</p>
+      <p id="experience" class="font-mono text-sm">{experience.title} at {experience.subtitle}</p>
     {/each}
   </fieldset>
   {/if}
@@ -67,16 +74,35 @@
   <fieldset class="w-full">
     <label for="projects" class="text-xs font-medium" use:melt={$rootLabel}>Projects</label>
     {#each $UserObservable.projects as project}
-      <p id="education" class="font-mono">{project.title} at {project.subtitle}</p>
+      <p id="projects" class="font-mono text-sm">{project.title} at {project.subtitle}</p>
     {/each}
   </fieldset>
   {/if}
   <button
-    class="p-sm pl-md pr-md text-xs border rounded w-1/2 mt-md border-green-300 bg-green-50 hover:bg-green-100"
+    class="p-sm pl-md pr-md text-xs border rounded w-fit mt-md border-green-300 bg-green-50 hover:bg-green-100"
     aria-label="create-profile"
     on:click={() => {
       if ($error$.length == 0) {
-        console.log($UserObservable)
+        console.log(` 
+          Suppose you are a developer named ${$UserObservable.name} that has ${$UserObservable.yearsOfExperience} years of experience.
+
+          You have the following skills: ${$UserObservable.skills.join(', ')}
+          ${
+            $UserObservable.education.length > 0 ?
+            `You have studied at ${$UserObservable.education.map((v) => `${v.subtitle} achieving a ${v.title} degree and ended up describing the experience with the following paragraph: "${v.description}"`).join(' also ')}.\n`
+            : ''
+          }${
+            $UserObservable.experience.length > 0 ?
+            `You have worked at ${$UserObservable.experience.map((v) => `${v.subtitle} as a ${v.title} and ended up describing the experience with the following paragraph: "${v.description}"`).join(' also ')}.\n`
+            : ''
+          }${
+            $UserObservable.projects.length > 0 ?
+            `You have also worked on the following projects: ${$UserObservable.projects.map((v) => `${v.title} which is a software that does the following: ${v.description}`).join(' also worked on ')}.\n`
+            : ''
+          }
+
+          Create a description with a maximum of 256 characters for a developer in search of a job
+        `)
       }
     }}
   >

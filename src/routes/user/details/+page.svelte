@@ -5,10 +5,18 @@
 
 	export let data: PageData;
 
-	const { education$, experience$, skills$, projects$, error$ } = data.userStore;
+	const { education$, experience$, skills$, projects$, error$, yearsOfExperience$ } = data.userStore;
+
+	$: console.log($yearsOfExperience$);
 </script>
 
 <div class="flex flex-col flex-wrap p-sm">
+	<TextInput
+		id="years-of-experience"
+		title="Years of experience"
+		observable={yearsOfExperience$}
+		error={$error$?.find((v) => v.field == 'yearsOfExperience')?.message[0] ?? null}
+	/>
 	<TextInput
 		id="skills"
 		title="Skills"

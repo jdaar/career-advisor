@@ -117,7 +117,7 @@
 				>
 				<textarea
 					id={`${id}-description`}
-					class="border max-h-20 min-h-10 rounded w-full p-sm text-sm {error !== null &&
+					class="border max-h-20 min-h-10 rounded w-full p-sm text-sm font-mono {error !== null &&
 						'border-yellow-400'}"
 					bind:value={description}
 				/>
@@ -204,8 +204,11 @@
 </div>
 {/if}
 <div use:melt={$menu} class="p-sm bg-white border rounded text-xs flex gap-sm">
-	<div use:melt={$itemContextMenu} use:melt={$triggerDialog} class="p-sm border rounded">Edit</div>
+	<div aria-label="edit" tabindex="0" role="button" use:melt={$itemContextMenu} use:melt={$triggerDialog} class="p-sm border rounded">Edit</div>
 	<div
+	  	aria-label="delete"
+		tabindex="0"
+	 	role="button"
 		use:melt={$itemContextMenu}
 		on:click={deleteItem}
 		class="p-sm border border-red-300 bg-red-50 rounded"

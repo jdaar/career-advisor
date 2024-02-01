@@ -28,8 +28,9 @@ export const ListedDataSchema = z.object({
 export type ListedData = z.infer<typeof ListedDataSchema>;
 
 export const UserDetailsFormSchema = z.object({
+  yearsOfExperience: z.string().regex(/^\d+$/, 'Must be a number').transform(Number),
   experience: z.array(ListedDataSchema),
-  skills: z.array(z.string()).min(1, 'Must have at least one skill'),
+  skills: z.array(z.string().transform(v => v.trim()).pipe(z.string().min(1, 'Skill must have at least one character'))).min(1, 'Must have at least one skill'),
   education: z.array(ListedDataSchema),
   projects: z.array(ListedDataSchema),
 });
@@ -37,6 +38,7 @@ export const UserDetailsFormSchema = z.object({
 export type UserDetailsForm = z.infer<typeof UserDetailsFormSchema>;
 
 export const UserDetailsFormDefault: UserDetailsForm = {
+  yearsOfExperience: 0,
   experience: [],
   skills: [],
   education: [],

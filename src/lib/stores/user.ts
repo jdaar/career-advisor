@@ -24,6 +24,9 @@ export function createUserStore() {
   const cellphone$ = createSvelteBehaviourSubject<UserForm["cellphone"]>(
     defaults.cellphone,
   );
+  const yearsOfExperience$ = createSvelteBehaviourSubject<string>(
+    ''
+  );
 
   const education$ = createSvelteBehaviourSubject<UserDetailsForm["education"]>(
     defaults.education,
@@ -64,8 +67,9 @@ export function createUserStore() {
     experience$,
     projects$,
     skills$,
+    yearsOfExperience$
   ]).pipe(
-    map(([education, experience, projects, skills]) => UserDetailsFormSchema.safeParse({ education, experience, projects, skills })),
+    map(([education, experience, projects, skills, yearsOfExperience]) => UserDetailsFormSchema.safeParse({ education, experience, projects, skills, yearsOfExperience })),
     map((user) => {
       if (user.success) {
         return {
@@ -114,6 +118,7 @@ export function createUserStore() {
     experience$,
     projects$,
     skills$,
+    yearsOfExperience$,
     error$,
     UserObservable,
   };

@@ -39,13 +39,13 @@
   {#if listMode === true && Array.isArray($observable)}
     <div use:melt={$root} class="flex flex-row flex-wrap w-full border rounded p-sm text-sm gap-sm {error !== null && 'bg-yellow-100 border-yellow-400 border'}">
       {#each $tags as t}
-        <div use:melt={$tag(t)} class="flex p-sm border rounded-lg bg-gray-50 text-xs gap-sm" transition:fade>
+        <div use:melt={$tag(t)} class="flex p-sm border rounded-lg bg-gray-50 text-xs gap-sm font-mono {error !== null && 'bg-yellow-200 border-yellow-400'}" transition:fade>
           <span class="hover:font-medium">{t.value}</span>
           <button use:melt={$deleteTrigger(t)} class="font-bold hover:text-red-600 text-gray-600">x</button>
         </div>
         <div use:melt={$edit(t)} class="flex p-sm border rounded text-sm">{t.value}</div>
       {/each}
-      <input id={id} use:melt={$input} type="text" class="{error !== null ? 'bg-yellow-100' : ''}" />
+      <input id={id} use:melt={$input} type="text" class="font-mono {error !== null ? 'bg-yellow-100' : ''}" />
     </div>
   {:else}
     <input id={id} type="text" bind:value="{$observable}" class="border rounded w-full p-sm text-sm {error !== null && 'bg-yellow-100 border-yellow-400 border'}" />

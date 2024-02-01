@@ -2,6 +2,10 @@
 export default {
   content: ['./src/**/*.{html,js,svelte,ts}'],
   theme: {
+    fontFamily: {
+      'sans': ['"Inter"', 'sans-serif'],
+      'mono': ['"Ubuntu mono"', 'serif'],
+    },
     extend: {
       padding: {
         'xs': '0.2rem',

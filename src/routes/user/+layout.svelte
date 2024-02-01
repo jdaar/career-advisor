@@ -5,6 +5,7 @@
 	import type { LayoutData } from '../$types';
 	import Alert from '$lib/components/alert.svelte';
 	import { blur } from 'svelte/transition';
+	import { prettyName } from '$lib/utils';
 
 	const routes = ['/user/basic', '/user/details', '/user/summary'];
 
@@ -39,8 +40,8 @@
 				<p class="font-bold">There was an error validating the following fields</p>
 				{#each $error$ as error}
 					<p class="flex flex-col sm:flex-row mt-sm">
-						<span class="font-semibold w-20 mr-md"
-							>{error.field.slice(0, 1).toUpperCase().concat(error.field.slice(1))}</span
+						<span class="font-semibold w-full sm:w-20 mr-md"
+							>{prettyName(error.field)}</span
 						>
 						<span class="flex flex-col">
 							{#each error.message as message}

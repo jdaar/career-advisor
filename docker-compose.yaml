@@ -1,0 +1,13 @@
+services:
+  app:
+    container_name: app
+    ports:
+      - 8081:3000
+    build: .
+    depends_on:
+      - db
+  db:
+    container_name: db
+    image: redis
+    ports:
+      - 6379:6379

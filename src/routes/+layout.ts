@@ -5,6 +5,6 @@ export const load: LayoutLoad = async () => {
     const userStore = createUserStore();
 
     return {
-        userStore
+        userStore,
     };
 };

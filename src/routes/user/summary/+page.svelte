@@ -3,13 +3,39 @@
 	import type { PageData } from "./$types";
 	import { prettyName } from "$lib/utils";
 
-    export let data: PageData;
+  export let data: PageData;
 
-    const { UserObservable, error$ } = data.userStore;
+  const { UserObservable, error$ } = data.userStore;
 
-    const {
-        elements: { root: rootLabel }
-    } = createLabel()
+	function createProfile() {
+    if ($error$.length == 0) {
+      console.log($UserObservable)
+      console.log(` 
+        Suppose you are a developer named ${$UserObservable.name} that has ${$UserObservable.yearsOfExperience} years of experience.
+
+        You have the following skills: ${$UserObservable.skills.join(', ')}
+        ${
+          $UserObservable.education.length > 0 ?
+          `You have studied at ${$UserObservable.education.map((v) => `${v.subtitle} achieving a ${v.title} degree and ended up describing the experience with the following paragraph: "${v.description}"`).join(' also ')}.\n`
+          : ''
+        }${
+          $UserObservable.experience.length > 0 ?
+          `You have worked at ${$UserObservable.experience.map((v) => `${v.subtitle} as a ${v.title} and ended up describing the experience with the following paragraph: "${v.description}"`).join(' also ')}.\n`
+          : ''
+        }${
+          $UserObservable.projects.length > 0 ?
+          `You have also worked on the following projects: ${$UserObservable.projects.map((v) => `${v.title} which is a software that does the following: ${v.description}`).join(' also worked on ')}.\n`
+          : ''
+        }
+
+        Create a description with a maximum of 256 characters for a developer in search of a job
+      `)
+    }
+	}
+
+  const {
+    elements: { root: rootLabel }
+  } = createLabel()
 </script>
 
 {#if $error$.length > 0}
@@ -81,30 +107,7 @@
   <button
     class="p-sm pl-md pr-md text-xs border rounded w-fit mt-md border-green-300 bg-green-50 hover:bg-green-100"
     aria-label="create-profile"
-    on:click={() => {
-      if ($error$.length == 0) {
-        console.log(` 
-          Suppose you are a developer named ${$UserObservable.name} that has ${$UserObservable.yearsOfExperience} years of experience.
-
-          You have the following skills: ${$UserObservable.skills.join(', ')}
-          ${
-            $UserObservable.education.length > 0 ?
-            `You have studied at ${$UserObservable.education.map((v) => `${v.subtitle} achieving a ${v.title} degree and ended up describing the experience with the following paragraph: "${v.description}"`).join(' also ')}.\n`
-            : ''
-          }${
-            $UserObservable.experience.length > 0 ?
-            `You have worked at ${$UserObservable.experience.map((v) => `${v.subtitle} as a ${v.title} and ended up describing the experience with the following paragraph: "${v.description}"`).join(' also ')}.\n`
-            : ''
-          }${
-            $UserObservable.projects.length > 0 ?
-            `You have also worked on the following projects: ${$UserObservable.projects.map((v) => `${v.title} which is a software that does the following: ${v.description}`).join(' also worked on ')}.\n`
-            : ''
-          }
-
-          Create a description with a maximum of 256 characters for a developer in search of a job
-        `)
-      }
-    }}
+    on:click={createProfile}
   >
     <span class="sr-only">Create profile</span>
     Create profile

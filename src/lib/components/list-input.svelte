@@ -56,7 +56,7 @@
 		</button>
 		{#if $open}
 			<div use:melt={$content} transition:fade={{ duration: 100 }} class="content">
-				<div use:melt={$arrow} />
+				<div use:melt={$arrow} class="bg-white"/>
 				<div class="flex flex-col gap-2.5 bg-white p-sm border rounded">
 					<fieldset>
 						<label for={`${id}-title`} class="text-xs font-medium" use:melt={$rootLabel}

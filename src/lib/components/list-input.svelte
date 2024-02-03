@@ -5,6 +5,7 @@
 	import { BehaviorSubject } from 'rxjs';
 	import { fade } from 'svelte/transition';
 	import ListInputItem from './list-input-item.svelte';
+	import { next } from '@melt-ui/svelte/internal/helpers';
 
 	const {
 		elements: { trigger, content, arrow, close },
@@ -84,7 +85,6 @@
 						<button
 							class="p-sm pl-md pr-md text-xs border rounded w-full"
 							aria-label="create"
-							use:melt={$close}
 							on:click={() => {
 								$items = [
 									...$items,

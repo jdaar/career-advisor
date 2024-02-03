@@ -104,13 +104,23 @@
     {/each}
   </fieldset>
   {/if}
-  <button
-    class="p-sm pl-md pr-md text-xs border rounded w-fit mt-md border-green-300 bg-green-50 hover:bg-green-100"
-    aria-label="create-profile"
-    on:click={createProfile}
-  >
-    <span class="sr-only">Create profile</span>
-    Create profile
-  </button>
+  <form method="post" action="/profile/summary" class="flex flex-col gap-sm w-full">
+    <input type="hidden" name="name" value={$UserObservable.name} />
+    <input type="hidden" name="email" value={$UserObservable.email} />
+    <input type="hidden" name="cellphone" value={$UserObservable.cellphone} />
+    <input type="hidden" name="yearsOfExperience" value={$UserObservable.yearsOfExperience} />
+    <input type="hidden" name="skills" value={$UserObservable.skills.join('\0')} />
+    <input type="hidden" name="education" value={$UserObservable.education.map((v) => `${v.title}\0${v.subtitle}\0${v.description}`).join('\0')} />
+    <input type="hidden" name="experience" value={$UserObservable.experience.map((v) => `${v.title}\0${v.subtitle}\0${v.description}`).join('\0')} />
+    <input type="hidden" name="projects" value={$UserObservable.projects.map((v) => `${v.title}\0${v.subtitle}\0${v.description}`).join('\0')} />
+    <button
+      class="p-sm pl-md pr-md text-xs border rounded w-fit mt-md border-green-300 bg-green-50 hover:bg-green-100"
+      aria-label="create-profile"
+      on:click={createProfile}
+    >
+      <span class="sr-only">Create profile</span>
+      Create profile
+    </button>
+  </form>
 </div>
 {/if}

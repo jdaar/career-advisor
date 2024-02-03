@@ -7,7 +7,7 @@
 	import { blur } from 'svelte/transition';
 	import { prettyName } from '$lib/utils';
 
-	const routes = ['/user/basic', '/user/details', '/user/summary'];
+	const routes = ['/profile/basic', '/profile/details', '/profile/summary'];
 
 	const {
 		elements: {
@@ -55,7 +55,18 @@
 	{/if}
 	<nav class="border rounded p-sm flex flex-col gap-md w-full sm:w-2/3" use:melt={$rootPagination}>
 		<div>
-			<h1 class="m-0 text-md font-medium p-sm">Create profile</h1>
+			<div class="flex justify-between">
+				<h1 class="m-0 text-md font-medium p-sm">Create profile</h1>
+				<button
+					class="p-sm text-xs border rounded w-fit border-gray-300 bg-gray-50 hover:bg-gray-100"
+					on:click={() => {
+						goto("/");
+					}}
+					aria-label="go-back"
+				>
+				Go back
+				</button>
+			</div>
 			{#key $rangePagination.start}
 				<div in:blur>
 					<slot />

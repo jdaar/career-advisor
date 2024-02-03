@@ -114,7 +114,7 @@
     <input type="hidden" name="experience" value={$UserObservable.experience.map((v) => `${v.title}\0${v.subtitle}\0${v.description}`).join('\0')} />
     <input type="hidden" name="projects" value={$UserObservable.projects.map((v) => `${v.title}\0${v.subtitle}\0${v.description}`).join('\0')} />
     <button
-      class="p-sm pl-md pr-md text-xs border rounded w-fit mt-md border-green-300 bg-green-50 hover:bg-green-100"
+      class="p-sm pl-md pr-md text-xs border rounded w-fit mt-md self-center border-green-300 bg-green-50 hover:bg-green-100"
       aria-label="create-profile"
       on:click={createProfile}
     >

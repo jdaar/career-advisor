@@ -26,7 +26,9 @@
                     <h2 class="text-base font-medium">{profile?.name}</h2>
                     <h3 class="text-gray-700 text-sm">{profile?.email}</h3>
             </header>
-            <footer class="flex gap-sm justify-center content-center">
+            <footer>
+                <form action="/" method="POST" class="flex gap-sm justify-center content-center">
+                <input type="hidden" name="tag" value={profile?.tag} />
                 <button
                     class="p-sm text-xs border rounded w-fit border-gray-300 bg-gray-50 hover:bg-gray-100"
                     aria-label="profile-pipelines"
@@ -40,11 +42,14 @@
                 Edit
                 </button>
                 <button
+                    type="submit"
+                    formaction="?/delete"
                     class="p-sm text-xs border rounded w-fit border-red-300 bg-red-50 hover:bg-red-100"
                     aria-label="delete-profile"
                 >
                 Delete 
                 </button>
+                </form>
             </footer>
         </section>
         {/each}

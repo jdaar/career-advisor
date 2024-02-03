@@ -53,7 +53,7 @@
 			</Alert>
 		</div>
 	{/if}
-	<nav class="border rounded p-sm flex flex-col gap-md w-full sm:w-2/3" use:melt={$rootPagination}>
+	<nav class="border rounded p-sm flex flex-col gap-sm w-full sm:w-2/3" use:melt={$rootPagination}>
 		<div>
 			<div class="flex justify-between">
 				<h1 class="m-0 text-md font-medium p-sm">Create profile</h1>

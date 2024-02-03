@@ -6,7 +6,7 @@
 </script>
 
 <div class="w-full h-full flex flex-col justify-center p-sm items-center">
-	<nav class="border rounded p-sm flex flex-col gap-md w-full sm:w-2/3">
+	<nav class="border rounded p-sm flex flex-col gap-sm w-full sm:w-2/3">
         <div class="flex justify-between">
         <h1 class="m-0 text-md font-medium p-sm">Profiles</h1>
                 <button

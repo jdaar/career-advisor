@@ -20,6 +20,9 @@
                 </button>
         </div>
         <div class="gap-sm flex flex-col">
+        {#if data.profiles.length === 0}
+        <p class="text-center p-md text-xs text-gray-700">No profiles found</p>
+        {:else}
         {#each data.profiles as profile}
         <section class="border gap-sm rounded flex-wrap p-sm flex">
             <header class="w-full">
@@ -53,6 +56,7 @@
             </footer>
         </section>
         {/each}
+        {/if}
         </div>
     </nav>
 </div>
